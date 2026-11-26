@@ -1,0 +1,203 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&display=swap');
+
+:root {
+  --fond: #e9edf3;
+  --surface: #ffffff;
+  --encre: #1b2238;
+  --encre-douce: #5a6380;
+  --trait: #c9d0dc;
+  --rouge: #e2463b;
+  --bleu: #2f6fd6;
+  --jaune: #f3b622;
+  --vert: #2e9e6a;
+  --violet: #7b5bd6;
+  --orange: #f07f2b;
+  --rayon: 10px;
+  font-family: 'Bricolage Grotesque', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  font-size: 17px;
+  line-height: 1.45;
+  color: var(--encre);
+  background: var(--fond);
+}
+
+* { box-sizing: border-box; }
+body { margin: 0; min-height: 100dvh; }
+h1, h2, h3 { line-height: 1.1; margin: 0; }
+h2 { font-size: 1.35rem; font-weight: 800; }
+h3 { font-size: 1.05rem; font-weight: 600; }
+p { margin: 0; }
+.num { font-variant-numeric: tabular-nums; }
+.doux { color: var(--encre-douce); }
+.petit { font-size: 0.85rem; }
+
+/* ---------- Structure ---------- */
+.barre {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 18px;
+  background: var(--encre);
+  color: #fff;
+}
+.marque { font-weight: 800; font-size: 1.15rem; letter-spacing: -0.01em; display: flex; align-items: center; gap: 8px; }
+.marque .pions { display: inline-flex; gap: 3px; }
+.marque .pions i { width: 9px; height: 9px; border-radius: 50%; display: block; }
+.barre .qui { font-size: 0.9rem; opacity: 0.85; text-align: right; }
+
+main { max-width: 640px; margin: 0 auto; padding: 20px 16px 96px; display: grid; gap: 28px; }
+main.large { max-width: 1100px; }
+section { display: grid; gap: 12px; }
+.entete { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+
+.bloc {
+  background: var(--surface);
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon);
+  padding: 16px;
+}
+
+/* ---------- Formulaires ---------- */
+label { display: grid; gap: 4px; font-size: 0.9rem; font-weight: 600; }
+input, select, textarea {
+  font: inherit;
+  font-weight: 400;
+  color: var(--encre);
+  background: #fff;
+  border: 2px solid var(--trait);
+  border-radius: 8px;
+  padding: 10px 12px;
+  width: 100%;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--bleu); }
+
+button {
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid var(--encre);
+  background: var(--surface);
+  color: var(--encre);
+  padding: 10px 16px;
+  transition: transform 0.06s, box-shadow 0.06s;
+}
+button.principal { background: var(--encre); color: #fff; box-shadow: 0 3px 0 var(--bleu); }
+button.principal:active { transform: translateY(3px); box-shadow: 0 0 0 var(--bleu); }
+button.danger { border-color: var(--rouge); color: var(--rouge); }
+button.lien { border: none; background: none; padding: 4px 6px; color: var(--encre-douce); text-decoration: underline; }
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+:focus-visible { outline: 3px solid var(--jaune); outline-offset: 2px; }
+
+.rangee { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.erreur { color: var(--rouge); font-weight: 600; font-size: 0.95rem; min-height: 1.2em; }
+
+/* ---------- La tuile de l'étape (élément fort) ---------- */
+.tuile {
+  --c: var(--bleu);
+  background: var(--c);
+  color: #fff;
+  border: 3px solid var(--encre);
+  border-radius: 14px;
+  box-shadow: 0 7px 0 var(--encre);
+  padding: 20px 20px 22px;
+  display: grid;
+  gap: 14px;
+  animation: pose 0.45s cubic-bezier(0.2, 1.4, 0.4, 1) both;
+}
+.tuile.claire { color: var(--encre); }
+.tuile .etape { font-weight: 600; font-size: 0.95rem; opacity: 0.9; }
+.tuile .jeu { font-size: clamp(2.3rem, 11vw, 3.6rem); font-weight: 800; line-height: 0.95; letter-spacing: -0.03em; overflow-wrap: anywhere; }
+.tuile .avec { display: flex; flex-wrap: wrap; gap: 6px; }
+.tuile .avec span { background: rgba(255, 255, 255, 0.22); border-radius: 999px; padding: 3px 11px; font-weight: 600; font-size: 0.95rem; }
+.tuile.claire .avec span { background: rgba(27, 34, 56, 0.12); }
+.tuile .desc { font-size: 0.95rem; opacity: 0.92; }
+@keyframes pose {
+  from { transform: translateY(-14px) rotate(-1.5deg); opacity: 0; }
+  to { transform: none; opacity: 1; }
+}
+
+/* ---------- Piste du parcours ---------- */
+.piste { display: grid; gap: 8px; list-style: none; margin: 0; padding: 0; }
+.case {
+  display: grid;
+  grid-template-columns: 40px 1fr auto;
+  align-items: center;
+  gap: 12px;
+  background: var(--surface);
+  border: 1px solid var(--trait);
+  border-radius: var(--rayon);
+  padding: 10px 12px;
+}
+.case .n {
+  width: 40px; height: 40px; border-radius: 8px;
+  display: grid; place-items: center;
+  font-weight: 800; color: #fff; background: var(--c, var(--trait));
+}
+.case.claire .n { color: var(--encre); }
+.case.passee { opacity: 0.6; }
+.case.actuelle { border: 2px solid var(--encre); box-shadow: 0 3px 0 var(--encre); }
+.case .pts { font-weight: 800; font-variant-numeric: tabular-nums; }
+.case .titre { font-weight: 600; }
+
+/* ---------- Pastilles & listes ---------- */
+.pions-liste { display: flex; flex-wrap: wrap; gap: 6px; }
+.pion { display: inline-flex; align-items: center; gap: 6px; background: var(--surface); border: 1px solid var(--trait); border-radius: 999px; padding: 4px 12px 4px 6px; font-weight: 600; }
+.pion i { width: 14px; height: 14px; border-radius: 50%; background: var(--c, var(--encre-douce)); }
+.pion.moi { border: 2px solid var(--encre); }
+
+.classement { list-style: none; padding: 0; margin: 0; background: var(--surface); border: 1px solid var(--trait); border-radius: var(--rayon); }
+.classement li { display: grid; grid-template-columns: 2.2em 1fr auto; gap: 10px; padding: 10px 14px; border-top: 1px solid var(--trait); align-items: center; }
+.classement li:first-child { border-top: none; }
+.classement .rang { font-weight: 800; color: var(--encre-douce); font-variant-numeric: tabular-nums; }
+.classement li.podium-1 .rang { color: var(--jaune); }
+.classement li.moi { background: #eef3fd; font-weight: 600; }
+.classement .total { font-weight: 800; font-variant-numeric: tabular-nums; }
+
+.jeux { display: grid; gap: 8px; }
+.jeu-ligne { display: grid; grid-template-columns: 14px 1fr auto; gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--trait); border-radius: var(--rayon); padding: 10px 14px; }
+.jeu-ligne > i { width: 14px; height: 14px; border-radius: 4px; background: var(--c); }
+
+.tables { display: grid; gap: 10px; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+.table { background: var(--surface); border: 1px solid var(--trait); border-top: 6px solid var(--c); border-radius: var(--rayon); padding: 12px 14px; display: grid; gap: 8px; align-content: start; }
+
+/* ---------- Onglets bas (joueur) ---------- */
+.onglets {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  display: flex; justify-content: center; gap: 4px;
+  background: var(--surface); border-top: 1px solid var(--trait);
+  padding: 8px 8px calc(8px + env(safe-area-inset-bottom));
+}
+.onglets button { border: none; flex: 1; max-width: 200px; padding: 10px 6px; color: var(--encre-douce); background: none; }
+.onglets button[aria-current='true'] { color: var(--encre); background: var(--fond); }
+
+.vide { text-align: center; padding: 28px 16px; color: var(--encre-douce); }
+
+.toast {
+  position: fixed; left: 50%; bottom: 84px; transform: translateX(-50%);
+  background: var(--encre); color: #fff; padding: 10px 18px; border-radius: 8px;
+  font-weight: 600; z-index: 10; max-width: calc(100% - 32px);
+}
+.toast.err { background: var(--rouge); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+[hidden] { display: none !important; }
+
+/* ---------- Équipes & choix (jeux spéciaux) ---------- */
+.camps { display: grid; gap: 10px; }
+.camps .camp-titre { font-weight: 600; font-size: 0.95rem; margin-bottom: 6px; display: flex; align-items: center; gap: 8px; }
+.camps .camp-titre i { width: 12px; height: 12px; border-radius: 50%; background: var(--c); border: 2px solid #fff; }
+.choix { background: var(--surface); border: 2px solid var(--encre); border-radius: var(--rayon); padding: 14px; display: grid; gap: 10px; }
+.choix .options { display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 8px; }
+.choix .options button[aria-pressed='true'] { background: var(--encre); color: #fff; box-shadow: 0 3px 0 var(--jaune); }
+.equipe-ligne { display: flex; align-items: center; justify-content: space-between; gap: 10px; background: var(--surface); border: 1px solid var(--trait); border-radius: var(--rayon); padding: 8px 8px 8px 14px; }
+.equipe-ligne button { padding: 6px 12px; font-size: 0.9rem; }
+
+/* ---------- Saisie du score par le joueur ---------- */
+.score-joueur { display: grid; grid-template-columns: 48px 1fr 48px; gap: 8px; align-items: center; }
+.score-joueur input { text-align: center; font-size: 1.3rem; font-weight: 800; font-variant-numeric: tabular-nums; }
+.score-joueur .principal { grid-column: 1 / -1; }
+.score-joueur .pas { padding: 10px 0; }

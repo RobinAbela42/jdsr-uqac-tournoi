@@ -1,0 +1,12 @@
+{
+  "name": "jds-uqac",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev-server.js",
+    "test": "node scripts/test-scheduler.js && node scripts/test-flow.js && node scripts/test-special.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

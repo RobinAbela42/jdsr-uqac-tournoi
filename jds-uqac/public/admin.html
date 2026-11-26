@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#1b2238" />
+  <meta name="robots" content="noindex" />
+  <title>Admin · Tournoi JDS UQAC</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .controles { display: flex; flex-wrap: wrap; gap: 10px; }
+    .etat { font-size: 1.6rem; font-weight: 800; letter-spacing: -0.02em; }
+    .tables { grid-template-columns: repeat(auto-fill, minmax(min(340px, 100%), 1fr)); }
+    .score-ligne { display: grid; grid-template-columns: minmax(90px, 1fr) 42px 64px 42px 40px; gap: 6px; align-items: center; }
+    .score-ligne .nom { display: grid; gap: 3px; min-width: 0; overflow-wrap: anywhere; }
+    .score-ligne .champ { position: relative; }
+    .score-ligne input { padding: 6px 6px; text-align: center; font-variant-numeric: tabular-nums; }
+    .score-ligne .total { text-align: right; color: var(--encre-douce); font-variant-numeric: tabular-nums; }
+    .score-ligne .total.maj { color: var(--encre); font-weight: 800; }
+    .pas { padding: 6px 0; font-variant-numeric: tabular-nums; border-width: 1.5px; }
+    .pas[data-delta="1"], .pas[data-adj="1"] { background: var(--encre); color: #fff; }
+    .joueur-ligne { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--trait); border-radius: var(--rayon); padding: 8px 10px 8px 14px; }
+    .joueur-ligne .pas { width: 42px; }
+    .joueur-ligne .pas.autre { background: var(--surface); color: var(--encre); }
+    .auto.joueur { background: var(--bleu); }
+    .auto { position: absolute; top: -8px; right: -4px; background: var(--vert); color: #fff; font-size: 0.65rem; font-weight: 600; border-radius: 4px; padding: 0 4px; }
+    select.mini { padding: 2px 6px; font-size: 0.85rem; border-width: 1px; width: auto; max-width: 100%; justify-self: start; }
+    .camp { font-weight: 600; font-size: 0.9rem; color: var(--c); border-top: 1px solid var(--trait); padding-top: 6px; }
+    .choix-table { display: flex; align-items: center; gap: 8px; font-size: 0.9rem; }
+    .choix-table select { width: auto; flex: 1; padding: 6px 8px; }
+    .badge { display: inline-block; font-size: 0.75rem; font-weight: 600; background: var(--fond); border: 1px solid var(--trait); border-radius: 999px; padding: 0 8px; vertical-align: middle; }
+    .croix { border: none; background: none; padding: 0 0 0 4px; color: var(--encre-douce); font-size: 1.1rem; line-height: 1; }
+    fieldset.config { border: 1px solid var(--trait); border-radius: 8px; display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); }
+    fieldset.config legend { font-weight: 600; padding: 0 6px; }
+    fieldset.config .large { grid-column: 1 / -1; }
+    .ligne.biblio > i { border-radius: 50%; }
+    .grille-form { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+    .grille-form .large { grid-column: 1 / -1; }
+    .liste { display: grid; gap: 6px; }
+    .ligne { display: grid; grid-template-columns: 14px 1fr auto; gap: 12px; align-items: center; background: var(--surface); border: 1px solid var(--trait); border-radius: var(--rayon); padding: 10px 14px; }
+    .ligne > i { width: 14px; height: 14px; border-radius: 4px; background: var(--c, var(--trait)); }
+    .ligne.retire { opacity: 0.45; }
+    .colonnes { display: grid; gap: 28px; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); align-items: start; }
+    details.planning summary { cursor: pointer; font-weight: 600; padding: 4px 0; }
+    .etape-plan { display: grid; gap: 4px; padding: 10px 0; border-top: 1px solid var(--trait); font-size: 0.92rem; }
+    .etape-plan.actuelle { background: #eef3fd; margin: 0 -16px; padding: 10px 16px; }
+    .partage { font-size: 1.1rem; font-weight: 600; word-break: break-all; }
+    .interrupteur { display: flex; align-items: center; gap: 10px; font-weight: 600; }
+    .interrupteur input { width: auto; transform: scale(1.3); }
+  </style>
+</head>
+<body>
+  <header class="barre">
+    <div class="marque">
+      <span class="pions" aria-hidden="true"><i style="background:#e2463b"></i><i style="background:#2f6fd6"></i><i style="background:#f3b622"></i><i style="background:#2e9e6a"></i></span>
+      Admin du tournoi
+    </div>
+    <div class="qui"><a href="/" style="color:#fff">Page joueur</a></div>
+  </header>
+  <main class="large" id="app"><p class="vide">Chargement…</p></main>
+  <script type="module" src="admin.js"></script>
+</body>
+</html>
